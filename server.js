@@ -10,7 +10,7 @@ app.get('/', (request, response) => {
 });
 
 const corsOptions = {
-  origin: 'http://localhost:3001', 
+  origin: [/^http:\/\/localhost:\d+$/, "https://shes-a-scientist.vercel.app"],
   methods: 'GET,POST',          
   allowedHeaders: 'Content-Type,Authorization', 
 };
@@ -357,7 +357,7 @@ app.get('/api/v1/womenscientists/:id', (request, response) => {
 
 app.use(express.json());
 
-app.post('api/v1/womenscientists', (request, response) => {
+app.post('/api/v1/womenscientists', (request, response) => {
   const id = Date.now()
   const womanScientist = request.body;
   const { name, field, dateOfBirth, dateOfDeath, accomplishment, blurb, wikipediaLink, backgroundImage, image } = womanScientist;
@@ -376,4 +376,3 @@ app.post('api/v1/womenscientists', (request, response) => {
 })
 
 app.use(express.static('public'))
-app.use(cors());
